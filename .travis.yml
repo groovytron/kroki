@@ -10,11 +10,11 @@ install: true
 env:
   global:
     - KROKI_HOST='http://localhost:8000'
-    - "CURL_FLAGS=--fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml'"
+    - "CURL_FLAGS=(--fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml')"
     - DIAGRAMS_DIR='tests/diagrams'
 
 script:
-  - echo "$CURL_FLAGS"
+  - echo "${CURL_FLAGS[@]}"
   - echo "$KROKI_HOST"
   - echo "$DIAGRAMS_DIR"
   # - make installLocalDependencies
