@@ -8,9 +8,10 @@ jdk: openjdk12
 install: true
 
 env:
-  - KROKI_HOST='http://localhost:8000'
-  - "CURL_FLAGS=(--fail --location -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml')"
-  - DIAGRAMS_DIR='tests/diagrams'
+  global:
+    - KROKI_HOST='http://localhost:8000'
+    - "CURL_FLAGS=(--fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml')"
+    - DIAGRAMS_DIR='tests/diagrams'
 
 script:
   - make installLocalDependencies
