@@ -14,25 +14,28 @@ env:
     - DIAGRAMS_DIR='tests/diagrams'
 
 script:
-  - echo "${CURL_FLAGS[@]}"
-  - echo "$KROKI_HOST"
-  - echo "$DIAGRAMS_DIR"
-  # - make installLocalDependencies
-  # - make buildServer
-  # - make buildDockerImages
-  # - docker-compose --file tests/docker-compose.yaml up --detach
-  # - ./tests/wait-for-it.sh localhost:8000 --timeout=20
-  # - ./tests/wait-for-it.sh localhost:8001 --timeout=20
-  # - ./tests/wait-for-it.sh localhost:8002 --timeout=20
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/graphviz/svg" --data-binary "@$DIAGRAMS_DIR/hello.dot"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/blockdiag/svg" --data-binary "@$DIAGRAMS_DIR/kroki.diag"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/seqdiag/svg" --data-binary "@$DIAGRAMS_DIR/sequence.diag"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/actdiag/svg" --data-binary "@$DIAGRAMS_DIR/actions.diag"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/nwdiag/svg" --data-binary "@$DIAGRAMS_DIR/network.diag"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/c4plantuml/svg" --data-binary "@$DIAGRAMS_DIR/banking-system.puml"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/ditaa/svg" --data-binary "@$DIAGRAMS_DIR/components.ditaa"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/erd/svg" --data-binary "@$DIAGRAMS_DIR/schema.erd"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/mermaid/svg" --data-binary "@$DIAGRAMS_DIR/contribute.mmd"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/nomnoml/svg" --data-binary "@$DIAGRAMS_DIR/pirate.nomnoml"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/plantuml/svg" --data-binary "@$DIAGRAMS_DIR/architecture.puml"
-  # - curl "${CURL_FLAGS[@]}" "$KROKI_HOST/svgbob/svg" --data-binary "@$DIAGRAMS_DIR/cloud.bob"
+  - make installLocalDependencies
+  - make buildServer
+  - make buildDockerImages
+  - docker-compose --file tests/docker-compose.yaml up --detach
+  - ./tests/wait-for-it.sh localhost:8000 --timeout=20
+  - ./tests/wait-for-it.sh localhost:8001 --timeout=20
+  - ./tests/wait-for-it.sh localhost:8002 --timeout=20
+  - >
+    curl
+    --fail
+    -X POST
+    --header 'Content-type: text/plain' --header 'Accept: image/svg+xml'
+    "$KROKI_HOST/graphviz/svg"
+    --data-binary "@$DIAGRAMS_DIR/hello.dot"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/blockdiag/svg"  --data-binary "@$DIAGRAMS_DIR/kroki.diag"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/seqdiag/svg" --data-binary "@$DIAGRAMS_DIR/sequence.diag"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/actdiag/svg" --data-binary "@$DIAGRAMS_DIR/actions.diag"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/nwdiag/svg" --data-binary "@$DIAGRAMS_DIR/network.diag"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/c4plantuml/svg" --data-binary "@$DIAGRAMS_DIR/banking-system.puml"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/ditaa/svg" --data-binary "@$DIAGRAMS_DIR/components.ditaa"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/erd/svg" --data-binary "@$DIAGRAMS_DIR/schema.erd"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/mermaid/svg" --data-binary "@$DIAGRAMS_DIR/contribute.mmd"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/nomnoml/svg" --data-binary "@$DIAGRAMS_DIR/pirate.nomnoml"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/plantuml/svg" --data-binary "@$DIAGRAMS_DIR/architecture.puml"
+  # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/svgbob/svg" --data-binary "@$DIAGRAMS_DIR/cloud.bob"
