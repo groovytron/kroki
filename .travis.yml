@@ -27,8 +27,8 @@ script:
     -L
     -X POST
     --header 'Content-type: text/plain' --header 'Accept: image/svg+xml'
-    "$KROKI_HOST/graphviz/svg"
-    --data-binary "@$DIAGRAMS_DIR/hello.dot"
+    http://localhost:8000/graphviz/svg
+    --data-binary @tests/diagrams/hello.dot
   # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/blockdiag/svg"  --data-binary "@$DIAGRAMS_DIR/kroki.diag"
   # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/seqdiag/svg" --data-binary "@$DIAGRAMS_DIR/sequence.diag"
   # - curl --fail -X POST --header 'Content-type: text/plain' --header 'Accept: image/svg+xml' "$KROKI_HOST/actdiag/svg" --data-binary "@$DIAGRAMS_DIR/actions.diag"
