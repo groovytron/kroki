@@ -8,7 +8,7 @@ jdk: openjdk12
 install: true
 
 env:
-  - KROKI_HOST='http://localhost:.8000'
+  - KROKI_HOST='http://localhost:8000'
   - "CURL_FLAGS=(--fail -X POST -H 'Content-type: text/plain' -H 'Accept: image/svg+xml')"
   - DIAGRAMS_DIR='tests/diagrams'
 
