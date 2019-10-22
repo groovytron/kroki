@@ -22,6 +22,8 @@ script:
   - ./tests/wait-for-it.sh localhost:8001 --timeout=20
   - ./tests/wait-for-it.sh localhost:8002 --timeout=20
   - docker ps
+  - sleep 60
+  - docker ps
   - >
     curl
     --fail
