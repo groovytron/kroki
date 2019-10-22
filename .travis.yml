@@ -1,5 +1,8 @@
 language: java
 
+node_js:
+  - 12
+
 services:
   - docker
 
@@ -8,6 +11,5 @@ jdk: openjdk12
 install: true
 
 script:
-  - make installLocalDependencies
-  - make buildServer
-  - make buildDockerImages
+  - node --version
+  - npm --version
