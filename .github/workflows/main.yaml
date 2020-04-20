@@ -49,3 +49,12 @@ jobs:
 
     - name: Build Java server
       run: make buildServer
+
+    - name: Setup Docker
+      uses: docker-practice/actions-setup-docker@master
+      with:
+        docker_version: 19.03.8
+        docker_channel: stable
+
+    - name: Build container images
+      run: make buildDockerImages
