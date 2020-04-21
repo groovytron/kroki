@@ -58,3 +58,14 @@ jobs:
 
     - name: Build container images
       run: make buildDockerImages
+
+    - name: 'Setup Node.js 12'
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Install Node dependencies
+      run: npm install
+
+    - name: Run smoke tests
+      run: make smokeTests
